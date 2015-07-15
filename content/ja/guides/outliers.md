@@ -1,7 +1,4 @@
 ---
-last_modified: 2015/06/24
-translation_status: original
-language: ja
 title: Outlier Detection (BETA)
 kind: documentation
 sidebar:
