@@ -258,9 +258,9 @@ kind: documentation
         <ul class="arguments">
           <% %w(console python).each do |l| %>
             <%= argument "title", 'The event title. Limited to 100 characters.', :lang => l %>
-            <%= argument "text", "The body of the event. Limited to 4000 characters.", :lang => l %>
+            <%= argument "text", "The body of the event. Limited to 4000 characters. The text supports "+'<a href="/guides/markdown/">markdown</a>.', :lang => l %>
           <% end %>
-          <%= argument 'msg_text', 'The text for the message. Limited to 4000 characters.', :lang => 'ruby' %>
+          <%= argument 'msg_text', 'The text for the message. Limited to 4000 characters. The text supports '+'<a href="/guides/markdown/">markdown</a>.', :lang => 'ruby' %>
           <%= argument "msg_title", 'The event title. Limited to 100 characters.', :lang => 'ruby', :default => "''" %>
           <%= argument("date_happened", "POSIX timestamp of the event.", {:default => 'now'}) %>
           <%= argument("priority", "The priority of the event ('normal' or 'low').", {:default => "'normal'"}) %>
@@ -463,6 +463,10 @@ kind: documentation
               this monitor. Email notifications can be sent to specific users by
               using the same '@username' notation as events.",
               :default => "dynamic, based on query" %>
+          <%= argument 'tags', "A list of tags to associate with your monitor.
+              This can help you categorize and filter monitors.",
+              :default => "empty list" %>
+
           <li>
             <strong>options [optional]</strong>
             <div>A dictionary of options for the monitor. There are options that
@@ -591,6 +595,9 @@ kind: documentation
               :default => "dynamic, based on query" %>
           <%= argument 'options', "Refer to the create monitor documentation for
               details on the available options.", :default => "None" %>
+          <%= argument 'tags', "A list of tags to associate with your monitor.
+              This can help you categorize and filter monitors.",
+              :default => "empty list" %>
         </ul>
       </div>
       <%= right_side_div %>
@@ -1373,7 +1380,7 @@ kind: documentation
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>GET /api/v1/tags/hosts/:host_id_or_host_name</code>
+        <code>GET /api/v1/tags/hosts/:host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-get-host.py" %>
         <%= snippet_code_block "api-tags-get-host.rb" %>
@@ -1399,7 +1406,7 @@ kind: documentation
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>POST /api/v1/tags/hosts/:host_id_or_host_name</code>
+        <code>POST /api/v1/tags/hosts/:host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-add.py" %>
         <%= snippet_code_block "api-tags-add.sh" %>
@@ -1425,7 +1432,7 @@ kind: documentation
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>PUT /api/v1/tags/hosts/:host_id_or_host_name</code>
+        <code>PUT /api/v1/tags/hosts/:host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-update.py" %>
         <%= snippet_code_block "api-tags-update.sh" %>
@@ -1450,7 +1457,7 @@ kind: documentation
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>DELETE /api/v1/tags/hosts/:host_id_or_host_name</code>
+        <code>DELETE /api/v1/tags/hosts/:host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-remove.py" %>
         <%= snippet_code_block "api-tags-remove.sh" %>
