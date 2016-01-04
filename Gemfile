@@ -14,6 +14,7 @@ gem 'video_info'
 gem 'sassc'
 gem 'nanoc-cachebuster'
 gem 'octokit'
+gem 'git-version-bump'
 group :development do
   gem 'guard-nanoc'
   gem 'guard-livereload'
