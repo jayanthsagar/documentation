@@ -2,20 +2,6 @@
 title: Graphing Primer
 kind: documentation
 has_snippets: True
-sidebar:
-  nav:
-    - header: Graphing Primer
-    - text: Find the Graph Editor
-      href: "#editor"
-    - text: Grammar
-      href: "#grammar"
-      collapseid: collapseJSON
-    - text: Arithmetic & Functions
-      href: "#functions"
-      collapseid: collapseJSON
-    - text: "Y-Axis Controls"
-      href: "#yaxis"
-      collapseid: collapseJSON
 ---
 
 ## Find the Graph Editor
@@ -134,7 +120,7 @@ For more about using the JSON view, scroll to the bottom and click the Learn abo
 
 ### 4) Apply more advanced functions
 
-Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, fourier transforms, and more. For a list of available functions, [click here](#collapseGraphicFunctionTable){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseGraphicFunctionTable" }.
+Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. For a list of available functions, [click here](#collapseGraphicFunctionTable){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseGraphicFunctionTable" }.
 
 <div class="collapse" id="collapseGraphicFunctionTable" markdown="1">
 <!-- If you make changes here, change it to the table further down as well -->
