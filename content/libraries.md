@@ -8,6 +8,8 @@ sidebar:
       href: "#python"
     - text: Ruby
       href: "#ruby"
+    - text: Go
+      href: "#go"
     - text: C#
       href: "#c-sharp"
     - header: Community Libraries
@@ -60,6 +62,10 @@ There are many libraries available to help you interact with the Datadog API.
   * [DogApi][3] - A Ruby Datadog API wrapper.
   * [dogstatsd-ruby][4] - A Ruby DogStatsD client.
 
+#### Go
+
+  * [datadog-go][71] - A Go DogStatsD client.
+
 #### C\#
 {: #c-sharp}
 
@@ -107,9 +113,10 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### Go
 {: #community-go}
 
-  * [go-datadog-api][30] - a Go wrapper for our API by [Mark Smith][31]. 
-  * [go-dogstatsd][32] - a dogstatsd client written in Go by [Ooyala][33]. 
-  * [godspeed][63] - a dogstatsd client written in Go by [PagerDuty][64]
+  * [godspeed][63] - a feature-rich dogstatsd client written in Go by [PagerDuty][64].
+  * [go-datadog-api][30] - a Go wrapper for our API by [Mark Smith][31].
+  * [go-dogstatsd][32] - a dogstatsd client written in Go by [Ooyala][33].
+  * [xstats][69] - a generic client for service instrumentation using dogstatsd in Go by [Olivier Poitrey][70].
 
 #### Python
 {: #community-python}
@@ -149,7 +156,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### Ansible
 {: #community-integration-ansible}
 
-  * This [Ansible script ][46] is a callback plugin that posts events to your Datadog event stream as you deploy. Written by [Alek Storm][47]. 
+  * In addition to our official integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
 
 #### FreeSwitch
 {: #community-integration-freeswitch}
@@ -220,8 +227,8 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [43]: https://github.com/DataDog/datadog-formula
    [44]: https://gist.github.com/mastrolinux/6175280
    [45]: https://gist.github.com/mastrolinux
-   [46]: https://gist.github.com/alekstorm/6350729
-   [47]: https://gist.github.com/alekstorm
+   [46]: https://docs.ansible.com/ansible/list_of_monitoring_modules.html
+   [47]: https://github.com/ansible/ansible-modules-extras
    [48]: https://github.com/wimactel/FreeSwitch-DataDog-Metrics
    [49]: https://github.com/wimactel
    [50]: https://github.com/adamdunkley/casperjs-google-analytics-realtime-scrape
@@ -243,3 +250,6 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [66]: https://synrc.com/
    [67]: https://github.com/Guaranteed-Rate/App.Lib.MetricsDotNetDatadogPlugin
    [68]: https://github.com/alq666/rdog
+   [69]: https://github.com/rs/xstats
+   [70]: https://github.com/rs
+   [71]: https://github.com/DataDog/datadog-go

@@ -5,44 +5,45 @@ kind: documentation
 
 <%
   # Some shortcuts for the columns.
-  left_side_div  = '<div class="span6 api-left">'
-  right_side_div = '<div class="span6 api-right">'
+  left_side_div  = '<div class="col-xs-12 col-md-6 api-left">'
+  right_side_div = '<div class="col-xs-12 col-md-6 api-right">'
 
   no_args = '<em>This end point takes no JSON arguments.</em>'
   no_response = '<em>This end point does not return JSON on successful requests.</em>'
 %>
 
 
-<div class="container-fluid api-page">
-
-  <div class="row-fluid floating-header" data-spy="affix" data-offset-top="60">
+<div class="container api-page">
+  <div class="row floating-header" data-spy="affix" data-offset-top="60">
     <h1><%= @item[:title] %> </h1>
     <div class="btn-toolbar">
-      <div class="btn-group api-section-links">
-        <a class="btn" href="#authentication">Auth</a>
-        <a class="btn" href="#errors">Errors</a>
-        <a class="btn" href="#metrics">Metrics</a>
-        <a class="btn" href="#events">Events</a>
-        <a class="btn" href="#service_checks">Checks</a>
-        <a class="btn" href="#monitors">Monitors</a>
-        <a class="btn" href="#downtimes">Downtimes</a>
-        <a class="btn" href="#timeboards">Timeboards</a>
-        <a class="btn" href="#screenboards">Screenboards</a>
-        <a class="btn" href="#hosts">Hosts</a>
-        <a class="btn" href="#tags">Tags</a>
-        <a class="btn" href="#search">Search</a>
-        <a class="btn" href="#comments">Comments</a>
-        <a class="btn" href="#users">Users</a>
-        <a class="btn" href="#graphs">Graphs</a>
-        <a class="btn" href="#embeds">Embeds</a>
+      <div class="btn-group api-section-links btn-group-sm">
+        <a class="btn btn-default gradient" href="#authentication">Auth</a>
+        <a class="btn btn-default gradient" href="#errors">Errors</a>
+        <a class="btn btn-default gradient" href="#metrics">Metrics</a>
+        <a class="btn btn-default gradient" href="#events">Events</a>
+        <a class="btn btn-default gradient" href="#service_checks">Checks</a>
+        <a class="btn btn-default gradient" href="#monitors">Monitors</a>
+        <a class="btn btn-default gradient" href="#downtimes">Downtimes</a>
+        <a class="btn btn-default gradient" href="#timeboards">Timeboards</a>
+        <a class="btn btn-default gradient" href="#screenboards">Screenboards</a>
+        <a class="btn btn-default gradient" href="#hosts">Hosts</a>
+        <a class="btn btn-default gradient" href="#tags">Tags</a>
+        <a class="btn btn-default gradient" href="#search">Search</a>
+        <a class="btn btn-default gradient" href="#comments">Comments</a>
+        <a class="btn btn-default gradient" href="#users">Users</a>
+        <a class="btn btn-default gradient" href="#graphs">Graphs</a>
+        <a class="btn btn-default gradient" href="#embeds">Embeds</a>
       </div>
-      <div class="btn-group language-links">
-        <div lang="console" class="lang-btn btn">Shell</div>
-        <div lang="python" class="active lang-btn btn">Python</div>
-        <div lang="ruby" class="lang-btn btn">Ruby</div>
       </div>
-      <div class="btn-group">
-        <a class="btn" href="#troubleshooting">Troubleshooting</a>
+      <div class="btn-toolbar">
+      <div class="btn-group language-links btn-group-sm">
+        <div lang="console" class="lang-btn btn btn-default gradient">Shell</div>
+        <div lang="python" class="active lang-btn btn btn-default gradient">Python</div>
+        <div lang="ruby" class="lang-btn btn btn-default gradient">Ruby</div>
+      </div>
+      <div class="btn-group btn-group-sm">
+        <a class="btn btn-default gradient" href="#troubleshooting">Troubleshooting</a>
       </div>
     </div>
   </div>
@@ -56,7 +57,7 @@ kind: documentation
     -->
 
     <h3 id="overview">Overview</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         This section details Datadog's HTTP API. It makes it easy to get data in and
         out of Datadog.
@@ -80,7 +81,7 @@ kind: documentation
     ====================================================================
     -->
     <h3 id="authentication">Authentication</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           All requests to Datadog's API must be authenticated. Requests that write data require
@@ -105,7 +106,7 @@ kind: documentation
     -->
 
     <h3 id="errors">Success and Errors</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
         The Datadog API uses HTTP status codes to indicate the success or failure
@@ -144,7 +145,7 @@ kind: documentation
     -->
 
     <h3 id="metrics">Metrics</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           The metrics end-point allows you to:
@@ -162,7 +163,7 @@ kind: documentation
       </div>
     </div>
     <h4 id="metrics-post">Post time series points</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           The metrics end-point allows you to post time-series data that can be
@@ -171,7 +172,7 @@ kind: documentation
         <h5>Arguments</h5>
         <ul class="arguments">
           <%= argument 'series', 'A JSON array of metrics of the form. Each metric is of the form:' %>
-          <ul>
+
           <%= argument 'metric', 'The name of the time series' %>
           <li>
               <strong>points [required]</strong>
@@ -179,14 +180,11 @@ kind: documentation
                   <div>
                   <code>[[POSIX_timestamp, numeric_value], ...]</code>
                   </div>
-                  Note that the timestamp must be current.
+                  Note that the timestamp must be current, and the numeric value is a 32bit float gauge-type value.
               </div>
           </li>
           <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
           <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
-          <%= argument('type', 'The type of the metric - <code>gauge</code>
-            or <code>counter</code> (counter data is expected as a rate). Gauges are
-                32bit floats while counters are 64bit integers.', :default => 'gauge' ) %>
           </ul>
         </ul>
       </div>
@@ -200,7 +198,7 @@ kind: documentation
       </div>
     </div>
     <h4 id="metrics-query">Query time series points</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           This end point allows you to query for metrics from any time period.
@@ -239,7 +237,7 @@ kind: documentation
     -->
 
     <h3 id="events">Events</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           The events service allows you to programatically post events to the
@@ -248,7 +246,7 @@ kind: documentation
       </div>
     </div>
     <h4 id="events-post">Post an Event</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           This end point allows you to post events to the stream. You can tag them, set priority and event aggregate them with other events.
@@ -285,7 +283,7 @@ kind: documentation
       </div>
     </div>
     <h4 id="events-get">Get an Event</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           This end point allows you to query for event details.
@@ -308,7 +306,7 @@ kind: documentation
     </div>
 
     <h4 id="events-get-all">Query the Event Stream</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           The event stream can be queried and filtered by time, priority, sources and tags.
@@ -345,7 +343,7 @@ kind: documentation
     -->
 
     <h3 id="service_checks">Service Checks</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           The service check endpoint allows you to post check statuses for use with
@@ -354,7 +352,7 @@ kind: documentation
       </div>
     </div>
     <h4 id="checks-post">Post a Check Run</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
@@ -388,7 +386,7 @@ kind: documentation
     -->
 
     <h3 id="monitors">Monitors</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>Monitors allow you to watch a metric or check that you care about,
         notifying your team when some defined threshold is exceeded. Please
@@ -399,7 +397,7 @@ kind: documentation
 
     <!-- Create monitor -->
     <h4 id="monitor-create">Create a monitor</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
@@ -409,6 +407,7 @@ kind: documentation
               <ul>
                 <li><code>metric alert</code></li>
                 <li><code>service check</code></li>
+                <li><code>event alert</code></li>
               </ul>
             </div>
           </li>
@@ -455,6 +454,24 @@ kind: documentation
               <li><code>count</code> must be at >= your max threshold (defined
               in the <code>options</code>). e.g. if you want to notify on 1
               critical, 3 ok and 2 warn statuses count should be 3.</li>
+            </ul>
+
+            <h5>Event Alert Query</h5>
+            <code>events('sources:nagios status:error,warning priority:normal tags: "string query"').rollup("count").last("1h")"</code>
+            <ul class="arguments">
+              <li><code>event</code>, the event query string:
+                <ul class="arguments">
+                  <li><code>string_query</code> free text query to match against event title and text.</li>
+                  <li><code>sources</code> event sources (comma-separated).</li>
+                  <li><code>status</code> event statuses (comma-separated). Valid options: error, warn, and info.</li>
+                  <li><code>priority</code> event priorities (comma-separated). Valid options: low, normal, all.</li>
+                  <li><code>host</code> event reporting host (comma-separated).</li>
+                  <li><code>tags</code> event tags (comma-separated).</li>
+                  <li><code>excluded_tags</code> exluded event tags (comma-separated).</li>
+                </ul>
+              </li>
+              <li><code>rollup</code> the stats rollup method. <code>count</code> is the only supported method now.</li>
+              <li><code>last</code> the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d.</li>
             </ul>
           </li>
           <%= argument 'name', "The name of the alert.",
@@ -572,7 +589,7 @@ kind: documentation
 
     <!-- Show monitor -->
     <h4 id="monitor-get-details">Get a monitor's details</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
@@ -598,7 +615,7 @@ kind: documentation
 
     <!-- Edit monitor -->
     <h4 id="monitor-edit">Edit a monitor</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
@@ -632,7 +649,7 @@ kind: documentation
 
     <!-- Delete monitor -->
     <h4 id="monitor-delete">Delete a monitor</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <%= no_args %>
@@ -653,7 +670,7 @@ kind: documentation
 
     <!-- Show all monitors -->
     <h4 id="monitor-get-all">Get all monitor details</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
@@ -683,7 +700,7 @@ kind: documentation
 
     <!-- Mute all monitors -->
     <h4 id="monitor-mute-all">Mute all monitors</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
         Muting will prevent all monitors from notifying through email and posts
@@ -709,7 +726,7 @@ kind: documentation
 
     <!-- Unmute all monitors -->
     <h4 id="monitor-unmute-all">Unmute all monitors</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
         Disables muting all monitors. Throws an error if mute all was
@@ -732,7 +749,7 @@ kind: documentation
 
     <!-- Mute a single monitor -->
     <h4 id="monitor-mute">Mute a monitor</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
           <%= argument 'scope', "The scope to apply the mute to, e.g. role:db",
@@ -756,7 +773,7 @@ kind: documentation
 
     <!-- Unmute a single monitor -->
     <h4 id="monitor-unmute">Unmute a monitor</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
           <%= argument 'scope', "The scope to apply the mute to. For example,
@@ -786,7 +803,7 @@ kind: documentation
     -->
 
     <h3 id="downtimes">Downtimes</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>Downtiming gives you greater control over monitor notifications by allowing you
         to globally exclude scopes from alerting. Downtime settings, which can be
@@ -796,7 +813,7 @@ kind: documentation
 
     <!-- Schedule monitor downtime -->
     <h4 id="schedule-downtime">Schedule monitor downtime</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
           <%= argument 'scope', "The scope to apply the downtime to, e.g.
@@ -807,7 +824,31 @@ kind: documentation
           :default => "None" %>
           <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
           :default => "None" %>
-
+          <li>
+            <strong>recurrence [optional, default=None]</strong>
+            <div>An object defining the recurrence of the downtime with a variety of parameters:</div>
+            <ul>
+              <li>
+                <code>type</code> the type of recurrence. Choose from: <code>days</code>, <code>weeks</code>,
+              <code>months</code>, <code>years</code>.
+              </li>
+              <li>
+                <code>period</code> how often to repeat as an integer. For example to repeat every 3 days, select
+                a type of <code>days</code> and a period of <code>3</code>.
+              </li>
+              <li>
+                <code>week_days</code> (optional) a list of week days to repeat on. Choose from: <code>Mon</code>, <code>Tue</code>, <code>Wed</code>, <code>Thu</code>, <code>Fri</code>, <code>Sat</code> or <code>Sun</code>. Only applicable when <code>type</code> is <code>weeks</code>. <strong>First letter must be capitalized.</strong>
+              </li>
+              <li>
+                <code>until_occurrences</code> (optional) how many times the downtime will be rescheduled.
+                <strong><code>until_occurences</code> and <code>until_date</code></strong> are mutually exclusive
+              </li>
+              <li>
+                <code>until_date</code> (optional) the date at which the recurrence should end as a POSIX timestmap.
+                <strong><code>until_occurences</code> and <code>until_date</code></strong> are mutually exclusive
+              </li>
+            </ul>
+          </li>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -825,7 +866,7 @@ kind: documentation
 
     <!-- Update monitor downtime -->
     <h4 id="update-downtime">Update monitor downtime</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
           <%= argument 'id', "The integer id of the downtime to be updated" %>
@@ -838,6 +879,31 @@ kind: documentation
           :default => "original end" %>
           <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
           :default => "original message" %>
+          <li>
+            <strong>recurrence [optional, default=original recurrence]</strong>
+            <div>An object defining the recurrence of the downtime with a variety of parameters:</div>
+            <ul>
+              <li>
+                <code>type</code> the type of recurrence. Choose from: <code>days</code>, <code>weeks</code>,
+              <code>months</code>, <code>years</code>.
+              </li>
+              <li>
+                <code>period</code> how often to repeat as an integer. For example to repeat every 3 days, select
+                a type of <code>days</code> and a period of <code>3</code>.
+              </li>
+              <li>
+                <code>week_days</code> (optional) a list of week days to repeat on. Choose from: <code>Mon</code>, <code>Tue</code>, <code>Wed</code>, <code>Thu</code>, <code>Fri</code>, <code>Sat</code> or <code>Sun</code>. Only applicable when <code>type</code> is <code>weeks</code>. <strong>First letter must be capitalized.</strong>
+              </li>
+              <li>
+                <code>until_occurrences</code> (optional) how many times the downtime will be rescheduled.
+                <strong><code>until_occurences</code> and <code>until_date</code></strong> are mutually exclusive
+              </li>
+              <li>
+                <code>until_date</code> (optional) the date at which the recurrence should end as a POSIX timestmap.
+                <strong><code>until_occurences</code> and <code>until_date</code></strong> are mutually exclusive
+              </li>
+            </ul>
+          </li>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -855,7 +921,7 @@ kind: documentation
 
     <!-- Cancel monitor downtime -->
     <h4 id="cancel-downtime">Cancel monitor downtime</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <%= argument 'id', "The integer id of the downtime to be canceled" %>
@@ -874,7 +940,7 @@ kind: documentation
 
     <!-- Get a monitor downtime -->
     <h4 id="get-downtime">Get a monitor downtime</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
           <%= no_args %>
@@ -893,7 +959,7 @@ kind: documentation
 
     <!-- Get all monitor downtimes -->
     <h4 id="get-all-downtime">Get all monitor downtimes</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
           <%= argument 'current_only', "Only return downtimes that are active
@@ -920,7 +986,7 @@ kind: documentation
     -->
 
     <h3 id="timeboards">Timeboards</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           This endpoint allows you to programmatically create, update
@@ -929,7 +995,7 @@ kind: documentation
       </div>
     </div>
     <h4 id="dashboards-post">Create a Timeboard</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
@@ -988,7 +1054,7 @@ kind: documentation
 
     <!-- update a dashboard -->
     <h4 id="dashboards-update">Update a Timeboard</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
@@ -1057,7 +1123,7 @@ kind: documentation
 
     <!-- delete a dashboard -->
     <h4 id="dashboards-delete">Delete a Timeboard</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>Delete an existing timeboard.</p>
         <%= no_args %>
@@ -1076,7 +1142,7 @@ kind: documentation
 
     <!-- get a dashboard -->
     <h4 id="dashboards-get-all">Get all Timeboards</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>Fetch all of your timeboards' definitions.</p>
         <h5>Arguments</h5>
@@ -1098,7 +1164,7 @@ kind: documentation
 
     <!-- get a dashboard -->
     <h4 id="dashboards-get">Get a Timeboard</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>Fetch an existing dashboard's definition.</p>
         <h5>Arguments</h5>
@@ -1125,7 +1191,7 @@ kind: documentation
     -->
 
     <h3 id="screenboards">Screenboards</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
         You can view more detailed documentation on the Screenboard API at
@@ -1135,7 +1201,7 @@ kind: documentation
     </div>
 
     <h4 id="screenboards-post">Create a Screenboard</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
@@ -1164,7 +1230,7 @@ kind: documentation
 
     <!-- delete a dashboard -->
     <h4 id="timeboards-delete">Delete a Screenboard</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>Delete an existing screenboard.</p>
         <%= no_args %>
@@ -1184,7 +1250,7 @@ kind: documentation
 
     <!-- get a screenboard -->
     <h4 id="screenboards-get">Get a Screenboard</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>Fetch an existing screenboard's definition.</p>
         <h5>Arguments</h5>
@@ -1206,7 +1272,7 @@ kind: documentation
 
     <!-- get all screenboards -->
     <h4 id="screenboards-get-all">Get all Screenboards</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>Fetch all of your screenboards' definitions.</p>
         <h5>Arguments</h5>
@@ -1217,10 +1283,11 @@ kind: documentation
         <code>GET /api/v1/screen</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-screenboard-get-all.py" %>
-        <!-- TO FIX: Ruby -->
+        <%= snippet_code_block "api-screenboard-get-all.rb" %>
         <%= snippet_code_block "api-screenboard-get-all.sh" %>
         <h5>Example Response</h5>
         <%= snippet_result_code_block "api-screenboard-get-all.py" %>
+        <%= snippet_result_code_block "api-screenboard-get-all.rb" %>
         <%= snippet_result_code_block "api-screenboard-get-all.sh" %>
       </div>
     </div>
@@ -1228,7 +1295,7 @@ kind: documentation
 
     <!-- share a screenboard -->
     <h4 id="screenboards-share">Share a Screenboard</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>Share an existing screenboard's with a public URL.</p>
         <h5>Arguments</h5>
@@ -1250,7 +1317,7 @@ kind: documentation
 
     <!-- revoke a screenboard -->
     <h4 id="screenboards-revoke">Revoke a shared a Screenboard</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>Revoke a currently shared screenboard's.</p>
         <h5>Arguments</h5>
@@ -1277,7 +1344,7 @@ kind: documentation
     <h3 id="hosts">Hosts</h3>
 
     <h4 id="hosts-mute">Mute a Host</h4>
-    <div class="row-fluid">
+    <div class="row">
     <%= left_side_div %>
       <h5>Arguments</h5>
       <ul class="arguments">
@@ -1301,7 +1368,7 @@ kind: documentation
     </div>
 
     <h4 id="hosts-unmute">Unmute a Host</h4>
-    <div class="row-fluid">
+    <div class="row">
     <%= left_side_div %>
       <h5>Arguments</h5>
         <%= no_args %>
@@ -1327,7 +1394,7 @@ kind: documentation
     -->
 
     <h3 id="tags">Tags</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           The tag end point allows you to tag hosts with keywords meaningful to you - like <code>role:database</code>.
@@ -1345,7 +1412,7 @@ kind: documentation
     </div>
 
     <h4 id="tags-get">Get Tags</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           Return a mapping of tags to hosts for your whole infrastructure.
@@ -1370,7 +1437,7 @@ kind: documentation
     </div>
 
     <h4 id="tags-get-host">Get Host Tags</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           Return the list of tags that apply to a given host.
@@ -1396,7 +1463,7 @@ kind: documentation
     </div>
 
     <h4 id="tags-add">Add Tags to a Host</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           This end point allows you to add tags to a host.
@@ -1422,7 +1489,7 @@ kind: documentation
     </div>
 
     <h4 id="tags-update">Update Host Tags</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           This end point allows you to update all tags for a given host.
@@ -1448,7 +1515,7 @@ kind: documentation
     </div>
 
     <h4 id="tags-remove">Remove Host Tags</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           This end point allows you to remove all tags for a given host.
@@ -1477,7 +1544,7 @@ kind: documentation
     -->
 
     <h3 id="search">Search</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           This end point allows you to search for entities from the last 24 hours in Datadog. The
@@ -1533,7 +1600,7 @@ kind: documentation
     -->
 
     <h3 id="comments">Comments</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
         Comments are how discussion happens on Datadog. You can create, edit, delete
@@ -1544,7 +1611,7 @@ kind: documentation
 
     <!-- Create comments -->
     <h4 id="comments-create">Create a comment</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           Comments are essentially special forms of events that
@@ -1575,7 +1642,7 @@ kind: documentation
 
     <!-- Edit comments -->
     <h4 id="comments-edit">Edit a Comment</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
@@ -1599,7 +1666,7 @@ kind: documentation
 
     <!-- Edit comments -->
     <h4 id="comments-delete">Delete a Comment</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <%= no_args %>
@@ -1623,34 +1690,139 @@ kind: documentation
     -->
 
     <h3 id="users">Users</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
-        You can invite users to join DataDog using the API.
+        You can create, edit, and disable users.
         </p>
       </div>
     </div>
 
-    <!-- Create alerts -->
-    <h4 id="users-invite">Invite Users</h4>
-    <div class="row-fluid">
+    <!-- Create user -->
+    <h4>Create User</h4>
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
-          <%= argument 'emails', "A list of email addresses to send an invite to." %>
+          <%= argument 'handle', "The user handle, must be a valid email." %>
+          <%= argument 'name', "The name of the user.", :default => 'None' %>
         </ul>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>POST api/v1/invite_users</code>
+        <code>POST api/v1/user</code>
         <h5>Example Request</h5>
-        <%= snippet_code_block "api-user-invite.py" %>
-        <%= snippet_code_block "api-user-invite.rb" %>
-        <%= snippet_code_block "api-user-invite.sh" %>
+        <%= snippet_code_block "api-user-create.py" %>
+        <%= snippet_code_block "api-user-create.rb" %>
+        <%= snippet_code_block "api-user-create.sh" %>
         <h5>Example Response</h5>
-        <%= snippet_result_code_block "api-user-invite.py" %>
-        <%= snippet_result_code_block "api-user-invite.rb" %>
-        <%= snippet_result_code_block "api-user-invite.sh" %>
+        <%= snippet_result_code_block "api-user-create.py" %>
+        <%= snippet_result_code_block "api-user-create.rb" %>
+        <%= snippet_result_code_block "api-user-create.sh" %>
+      </div>
+    </div>
+
+    <!-- Get User -->
+    <h4>Get User</h4>
+    <div class="row">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument 'handle', "The handle of the user." %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET api/v1/user/:handle</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-user-get.py" %>
+        <%= snippet_code_block "api-user-get.rb" %>
+        <%= snippet_code_block "api-user-get.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-user-get.py" %>
+        <%= snippet_result_code_block "api-user-get.rb" %>
+        <%= snippet_result_code_block "api-user-get.sh" %>
+      </div>
+    </div>
+
+    <!-- Get All Users -->
+    <h4>Get All Users</h4>
+    <div class="row">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= no_args %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET api/v1/user </code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-user-get-all.py" %>
+        <%= snippet_code_block "api-user-get-all.rb" %>
+        <%= snippet_code_block "api-user-get-all.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-user-get-all.py" %>
+        <%= snippet_result_code_block "api-user-get-all.rb" %>
+        <%= snippet_result_code_block "api-user-get-all.sh" %>
+      </div>
+    </div>
+
+
+    <!-- Update user -->
+    <h4>Update User</h4>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          Can only be used with application keys belonging to administrators.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument 'handle', "The handle of the user." %>
+          <%= argument 'name', "The new name of the user.", :default => 'None' %>
+          <%= argument 'email', "The new email of the user.", :default => 'None' %>
+          <%= argument 'disabled', "The new disabled status of the user.", :default => 'None' %>
+          <%= argument 'is_admin', "The new admin status of the user.", :default => 'None' %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>PUT api/v1/user/:handle</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-user-update.py" %>
+        <%= snippet_code_block "api-user-update.rb" %>
+        <%= snippet_code_block "api-user-update.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-user-update.py" %>
+        <%= snippet_result_code_block "api-user-update.rb" %>
+        <%= snippet_result_code_block "api-user-update.sh" %>
+      </div>
+    </div>
+
+
+    <!-- Disable User -->
+    <h4>Disable User</h4>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          Can only be used with application keys belonging to administrators.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument 'handle', "The handle of the user." %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>DELETE api/v1/user/:handle</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-user-disable.py" %>
+        <%= snippet_code_block "api-user-disable.rb" %>
+        <%= snippet_code_block "api-user-disable.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-user-disable.py" %>
+        <%= snippet_result_code_block "api-user-disable.rb" %>
+        <%= snippet_result_code_block "api-user-disable.sh" %>
       </div>
     </div>
 
@@ -1661,7 +1833,7 @@ kind: documentation
     -->
 
     <h3 id="graphs">Graphs</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
         You can take graph snapshots using the API.
@@ -1671,7 +1843,7 @@ kind: documentation
 
     <!-- Create alerts -->
     <h4 id="graph-snapshot">Graph Snapshot</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
@@ -1702,7 +1874,7 @@ kind: documentation
     -->
 
     <h3 id="embeds">Embeddable Graphs</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           You can interact with embeddable graphs through the API.
@@ -1712,7 +1884,7 @@ kind: documentation
 
     <!-- Get All Embeds -->
     <h4 id="embeds-get-all">Get All Embeds</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           Gets a list of previously created embeddable graphs.
@@ -1743,7 +1915,7 @@ kind: documentation
 
     <!-- Create Embed -->
     <h4 id="embeds-create">Create Embed</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           Creates a new embeddable graph.
@@ -1785,7 +1957,7 @@ kind: documentation
 
     <!-- Get Specifc Embed -->
     <h4 id="embeds-get">Get Specific Embed</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           Get the HTML fragment for a previously generated embed with embed_id.
@@ -1833,7 +2005,7 @@ kind: documentation
 
     <!-- Enable Embed -->
     <h4 id="embeds-enable">Enable Embed</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           Enable a specified embed.
@@ -1863,7 +2035,7 @@ kind: documentation
 
     <!-- Revoke Embed -->
     <h4 id="embeds-revoke">Revoke Embed</h4>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>
           Revoke a specified embed.
@@ -1898,7 +2070,7 @@ kind: documentation
     -->
 
     <h3 id="troubleshooting">Troubleshooting</h3>
-    <div class="row-fluid">
+    <div class="row">
       <%= left_side_div %>
         <p>We do very minimal error checking on the API front-end, as we queue all data for asynchronous processing
            (the goal being to always, always accept your data in production situations and decouple our systems from yours).</p>

@@ -45,7 +45,7 @@ Before you push, make sure you verify there are no bad links by going to localho
 
 If there are no errors, then and only then push and merge. **If there are errors, please don't merge.** If you have been working on code samples, run ```rake clean``` then ```rake test```. If you didn't work on code samples, don't bother with test.
 
-If you are using rake test, you need an environment variable for DD_API_KEY and DD_APP_KEY. These should be for a test account that does not include dozens of people. There are several samples that mute and unmute everything. Everyone in the org will be notified. If you are the only one in the org, you won't be getting angry emails from others asking you to stop muting everything.
+If you are using rake test, you need an environment variable for TEST_DD_API_KEY and TEST_DD_APP_KEY. These should be for a test account that does not include dozens of people. There are several samples that mute and unmute everything. Everyone in the org will be notified. If you are the only one in the org, you won't be getting angry emails from others asking you to stop muting everything.
 
 ## How to add a new integration
 
@@ -59,6 +59,8 @@ Create a markdown file under content/integratons. Add the following front matter
     ---
 
 If you are writing a lot about the integration, change doclevel to complete or just remove the whole line. Now write the doc. There is no need to update any index, menu, or sidebars. Those are automatically generated.
+
+Every integration should have at least four sections. First include an overview. Second is the Installation process. Third include troubleshooting steps. Fourth should be when you last verified and under what conditions it worked. If someone has already included this, add yours above the previous one so we can see some sort of history. 
 
 ## How to add a new Guide
 
