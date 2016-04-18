@@ -52,7 +52,6 @@ GEM
       rake
     htmlentities (4.3.4)
     http_parser.rb (0.6.0)
-    jsmin (1.0.1)
     json (1.8.2)
     kramdown (1.5.0)
     libnotify (0.9.1)
@@ -69,12 +68,8 @@ GEM
       cri (~> 2.7)
     nanoc-cachebuster (0.3.1)
       nanoc (>= 3.3.0)
-    nanoc-toolbox (0.2.1)
-      jsmin (~> 1.0)
-      nanoc (~> 3.7)
-      nokogiri (~> 1.6)
     nenv (0.2.0)
-    nokogiri (1.6.7.1)
+    nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     notiffany (0.0.8)
       nenv (~> 0.1)
@@ -134,8 +129,7 @@ DEPENDENCIES
   kramdown
   nanoc
   nanoc-cachebuster
-  nanoc-toolbox
-  nokogiri (~> 1.6.7.1)
+  nokogiri (~> 1.6.7.2)
   octokit
   oj
   rack-contrib
